@@ -4,7 +4,7 @@ import org.openqa.selenium.firefox.FirefoxOptions
 
 FirefoxOptions options = new FirefoxOptions()
 options.setProfile(new FirefoxProfile(new File(System.getProperty('firefox.profile.path'))))
-options.setHeadless(true)
+options.setHeadless(Boolean.valueOf(System.getProperty('firefox.headless')))
 driver = {
   // we pass profile with trusted localhost ssl certificate
   new FirefoxDriver(options)

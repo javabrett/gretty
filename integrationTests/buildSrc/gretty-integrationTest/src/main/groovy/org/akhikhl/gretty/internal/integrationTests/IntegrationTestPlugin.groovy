@@ -207,6 +207,7 @@ class IntegrationTestPlugin extends BasePlugin {
         systemProperty 'webdriver.gecko.driver', project.rootProject.tasks.unpackGeckoDriver.ext.outputFile.absolutePath
         systemProperty 'geb.build.reportsDir', project.reporting.file(task.name)
         systemProperty 'firefox.profile.path', project.rootProject.file('config/firefox-profile').absolutePath
+        systemProperty 'firefox.headless', false
       }
     }
 
