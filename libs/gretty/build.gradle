@@ -6,9 +6,8 @@ apply from: rootProject.file('common.gradle')
 
 dependencies {
   compile project(':libs:gretty-core'), {
-    // gradle API provides it's own versions of groovy-all and logback.
+    // gradle API provides it's own versions of groovy-all.
     exclude group: 'org.codehaus.groovy', module: 'groovy-all'
-    exclude group: 'ch.qos.logback', module: 'logback-classic'
   }
   compile "org.springframework.boot:spring-boot-loader-tools:${springBootVersion}"
   // jetty-util provides org.eclipse.jetty.util.Scanner. Must use version 8 to stay compatible with JDK6.
