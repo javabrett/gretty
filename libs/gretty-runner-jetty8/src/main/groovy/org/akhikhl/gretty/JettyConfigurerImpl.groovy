@@ -201,7 +201,6 @@ class JettyConfigurerImpl implements JettyConfigurer {
     context.setExtraClasspath(webappClassPath.collect { it.endsWith('.jar') ? it : (it.endsWith('/') ? it : it + '/') }.join(';'))
     if (webappParams.webXml != null) context.setDescriptor(webappParams.webXml);
     FilteringClassLoader classLoader = new FilteringClassLoader(context)
-    classLoader.addServerClass('ch.qos.logback.')
     classLoader.addServerClass('org.slf4j.')
     classLoader.addServerClass('org.codehaus.groovy.')
     classLoader.addServerClass('groovy.')

@@ -207,7 +207,6 @@ class JettyConfigurerImpl implements JettyConfigurer {
     context.setAttribute('org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern',
             '.*/[^/]*servlet-api-[^/]*\\.jar$|.*/javax.servlet.jsp.jstl-.*\\.jar$|.*/[^/]*taglibs.*\\.jar$');
     FilteringClassLoader classLoader = new FilteringClassLoader(context)
-    classLoader.addServerClass('ch.qos.logback.')
     classLoader.addServerClass('org.slf4j.')
     classLoader.addServerClass('org.codehaus.groovy.')
     classLoader.addServerClass('groovy.')
