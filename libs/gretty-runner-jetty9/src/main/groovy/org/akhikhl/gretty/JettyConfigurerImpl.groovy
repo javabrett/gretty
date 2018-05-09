@@ -208,7 +208,6 @@ class JettyConfigurerImpl implements JettyConfigurer {
     context.setInitParameter('org.eclipse.jetty.servlet.Default.useFileMappedBuffer', serverParams.productMode ? 'true' : 'false')
     if (webappParams.webXml != null) context.setDescriptor(webappParams.webXml);
     FilteringClassLoader classLoader = new FilteringClassLoader(context)
-    classLoader.addServerClass('org.slf4j.')
     classLoader.addServerClass('org.codehaus.groovy.')
     classLoader.addServerClass('groovy.')
     classLoader.addServerClass('groovyx.')
