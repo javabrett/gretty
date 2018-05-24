@@ -76,8 +76,9 @@ abstract class BaseScannerManager implements ScannerManager {
     protected static void collectDependenciesSourceSets(Collection<File> scanDirs, Project p) {
         List<Project> dependencyProjects = ProjectUtils.getDependencyProjects(p, 'implementation')
         for(Project project: dependencyProjects) {
-            // adding sourceSets of dependecy project
+            // adding sourceSets of dependency project
             scanDirs.addAll(project.sourceSets.main.allSource.srcDirs)
+            scanDirs.addAll(project.sourceSets.main.resources.srcDirs)
             // TODO: add runtime classpath?
             // repeat for dependency's dependencies
             collectDependenciesSourceSets(scanDirs, project)
