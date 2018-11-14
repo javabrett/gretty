@@ -30,14 +30,6 @@ class GradleUtils {
     }
     return false
   }
-  
-  /**
-   * Replacement for instanceof operator, workaround for Gradle 1.10 bug:
-   * task classes defined in "build.gradle" fail instanceof check for base classes in gradle plugins.
-   */
-  static boolean instanceOf(Object obj, String className) {
-    derivedFrom(obj.getClass(), className)
-  }
 
   static void disableTaskOnOtherProjects(Project thisProject, String taskName) {
     thisProject.rootProject.allprojects { proj ->

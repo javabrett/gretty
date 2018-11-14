@@ -48,25 +48,25 @@ class FarmBeforeIntegrationTestTask extends FarmStartTask {
     doFirst {
       getIntegrationTestProjects().each { proj ->
         proj.tasks.each { t ->
-          if(GradleUtils.instanceOf(t, 'org.akhikhl.gretty.AppBeforeIntegrationTestTask') ||
-             GradleUtils.instanceOf(t, 'org.akhikhl.gretty.AppAfterIntegrationTestTask'))
+          if(t instanceof org.akhikhl.gretty.AppBeforeIntegrationTestTask ||
+             t instanceof org.akhikhl.gretty.AppAfterIntegrationTestTask)
             if(t.enabled)
               t.enabled = false
         }
       }
       project.tasks.each { t ->
-        if(GradleUtils.instanceOf(t, 'org.akhikhl.gretty.AppBeforeIntegrationTestTask') ||
-            GradleUtils.instanceOf(t, 'org.akhikhl.gretty.AppAfterIntegrationTestTask'))
+        if(t instanceof org.akhikhl.gretty.AppBeforeIntegrationTestTask ||
+            t instanceof org.akhikhl.gretty.AppAfterIntegrationTestTask)
           if(t.enabled)
             t.enabled = false
       }
       project.subprojects.each { proj ->
         proj.tasks.each { t ->
-          if(GradleUtils.instanceOf(t, 'org.akhikhl.gretty.AppBeforeIntegrationTestTask') ||
-             GradleUtils.instanceOf(t, 'org.akhikhl.gretty.AppAfterIntegrationTestTask') ||
-             GradleUtils.instanceOf(t, 'org.akhikhl.gretty.FarmBeforeIntegrationTestTask') ||
-             GradleUtils.instanceOf(t, 'org.akhikhl.gretty.FarmAfterIntegrationTestTask') ||
-             GradleUtils.instanceOf(t, 'org.akhikhl.gretty.FarmIntegrationTestTask'))
+          if(t instanceof org.akhikhl.gretty.AppBeforeIntegrationTestTask ||
+             t instanceof org.akhikhl.gretty.AppAfterIntegrationTestTask ||
+             t instanceof org.akhikhl.gretty.FarmBeforeIntegrationTestTask ||
+             t instanceof org.akhikhl.gretty.FarmAfterIntegrationTestTask ||
+             t instanceof org.akhikhl.gretty.FarmIntegrationTestTask)
             if(t.enabled)
               t.enabled = false
         }
@@ -113,12 +113,12 @@ class FarmBeforeIntegrationTestTask extends FarmStartTask {
             thisTask.mustRunAfter proj.tasks.testClasses
             if (t.name != 'test' && project.tasks.findByName('test'))
               thisTask.mustRunAfter project.tasks.test
-            if (GradleUtils.instanceOf(t, 'org.gradle.process.JavaForkOptions'))
+            if (t instanceof org.gradle.process.JavaForkOptions)
               t.doFirst {
                 if (thisTask.didWork)
                   passSystemPropertiesToIntegrationTestTask(t, t)
               }
-          } else if (GradleUtils.instanceOf(t, 'org.akhikhl.gretty.AppBeforeIntegrationTestTask') && t.integrationTestTask == thisTask.integrationTestTask)
+          } else if (t instanceof org.akhikhl.gretty.AppBeforeIntegrationTestTask && t.integrationTestTask == thisTask.integrationTestTask)
             t.mustRunAfter thisTask // need this to be able to disable AppBeforeIntegrationTestTask in doFirst
         }
       }

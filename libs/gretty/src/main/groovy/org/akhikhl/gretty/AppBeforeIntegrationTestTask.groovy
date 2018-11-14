@@ -67,7 +67,7 @@ class AppBeforeIntegrationTestTask extends AppStartTask {
         thisTask.dependsOn { project.tasks.testClasses }
         if(t.name != 'test' && project.tasks.findByName('test'))
           thisTask.mustRunAfter { project.tasks.test }
-        if(GradleUtils.instanceOf(t, 'org.gradle.process.JavaForkOptions')) {
+        if(t instanceof org.gradle.process.JavaForkOptions) {
           t.doFirst {
             if(thisTask.didWork)
               passSystemPropertiesToIntegrationTask(t)

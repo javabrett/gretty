@@ -181,12 +181,12 @@ class GrettyPlugin implements Plugin<Project> {
   private void addTaskDependencies(Project project) {
 
     project.tasks.whenObjectAdded { task ->
-      if (GradleUtils.instanceOf(task, 'org.akhikhl.gretty.AppStartTask'))
+      if (task instanceof org.akhikhl.gretty.AppStartTask)
         task.dependsOn {
           // We don't need any task for hard inplace mode.
           task.effectiveInplace ? project.tasks.prepareInplaceWebApp : project.tasks.prepareArchiveWebApp
         }
-      else if (GradleUtils.instanceOf(task, 'org.akhikhl.gretty.FarmStartTask')) {
+      else if (task instanceof org.akhikhl.gretty.FarmStartTask) {
         task.dependsOn {
           task.getWebAppConfigsForProjects().findResults {
             def proj = project.project(it.projectPath)

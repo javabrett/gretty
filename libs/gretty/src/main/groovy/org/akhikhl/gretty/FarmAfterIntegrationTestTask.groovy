@@ -88,7 +88,7 @@ class FarmAfterIntegrationTestTask extends FarmStopTask {
       proj.tasks.all { t ->
         if(t.name == thisTask.integrationTestTask)
           thisTask.mustRunAfter t
-        else if(GradleUtils.instanceOf(t, 'org.akhikhl.gretty.AppAfterIntegrationTestTask') && t.integrationTestTask == thisTask.integrationTestTask)
+        else if(t instanceof org.akhikhl.gretty.AppAfterIntegrationTestTask && t.integrationTestTask == thisTask.integrationTestTask)
           thisTask.mustRunAfter t
       }
     }
