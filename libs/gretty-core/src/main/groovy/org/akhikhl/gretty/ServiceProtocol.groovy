@@ -57,5 +57,20 @@ final class ServiceProtocol {
       s.close()
     }
   }
+
+  static void sendMayFail(int port, String command) {
+	log.warn("gretty-core: sendMayFail")
+    Socket s = null
+    try {
+      s = new Socket(InetAddress.getByName('127.0.0.1'), port)
+      OutputStream out = s.getOutputStream()
+      out.write(("${command}\n<<EOF>>\n").getBytes())
+      out.flush()
+    } catch (ConnectException ignored) {
+      log.debug(ignored.getMessage(), ignored)
+    } finally {
+      s?.close()
+    }
+  }
 }
 
