@@ -16,6 +16,7 @@ final class ServiceProtocol {
   private static final Logger logger = LoggerFactory.getLogger(ServiceProtocol.class)
 
   static String readMessage(int port) {
+	logger.warn("gretty-runner: readMessage")
     def data
     ServerSocket serverSocket = new ServerSocket(port, 1, InetAddress.getByName('127.0.0.1'))
     try {
@@ -44,6 +45,7 @@ final class ServiceProtocol {
   }
 
   static void send(int port, String command) {
+	logger.warn("gretty-runner: send")
     Socket s = new Socket(InetAddress.getByName('127.0.0.1'), port)
     try {
       OutputStream out = s.getOutputStream()
@@ -55,6 +57,7 @@ final class ServiceProtocol {
   }
 
   static void sendMayFail(int port, String command) {
+	logger.warn("gretty-runner: sendMayFail")
     Socket s = null
     try {
       s = new Socket(InetAddress.getByName('127.0.0.1'), port)

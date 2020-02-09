@@ -16,6 +16,7 @@ final class ServiceProtocol {
   protected static final Logger log = LoggerFactory.getLogger(ServiceProtocol)
 
   static String readMessage(int port) {
+    log.warn("gretty-core: readMessage")
     def data
     ServerSocket serverSocket = new ServerSocket(port, 1, InetAddress.getByName('127.0.0.1'))
     try {
@@ -45,6 +46,7 @@ final class ServiceProtocol {
   }
 
   static void send(int port, String command) {
+	log.warn("gretty-core: send")
     log.debug 'ServiceProtocol.send({}, {})', port, command
     Socket s = new Socket(InetAddress.getByName('127.0.0.1'), port)
     try {
